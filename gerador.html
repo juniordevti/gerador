@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Prompts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">prompt-builder v1</div>
+    <h1>Gerador de <span>Prompts</span><br>para Sites Profissionais</h1>
+    <p>Preencha o briefing ao lado. O terminal à direita monta, em tempo real, um prompt pronto pra colar em qualquer IA (Claude, ChatGPT, v0, Lovable...) e gerar o site.</p>
+  </header>
+
+  <div class="grid">
+    <!-- FORM -->
+    <div class="card">
+
+      <div class="field">
+        <label class="title">01 · Nome do negócio / cliente</label>
+        <input type="text" id="clientName" placeholder="Ex: Lee Tattoo, Barbearia L&M...">
+      </div>
+
+      <div class="field">
+        <label class="title">02 · Segmento / o que o negócio faz</label>
+        <input type="text" id="segment" placeholder="Ex: estúdio de tatuagem, consultoria financeira, clínica odontológica...">
+      </div>
+
+      <div class="field">
+        <label class="title">03 · Tipo de site</label>
+        <select id="siteType">
+          <option>Site institucional</option>
+          <option>Landing page (conversão)</option>
+          <option>Portfólio</option>
+          <option>E-commerce</option>
+          <option>Blog</option>
+          <option>Dashboard / SaaS</option>
+          <option>Página única (one-page)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="title">04 · Estilo visual</label>
+        <div class="chip-group" id="styleChips" data-single="true">
+          <div class="chip">Minimalista</div>
+          <div class="chip">Corporativo/sério</div>
+          <div class="chip">Moderno/ousado</div>
+          <div class="chip">Elegante/luxo</div>
+          <div class="chip">Dark/tech</div>
+          <div class="chip">Colorido/criativo</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="title">05 · Paleta de cores (opcional)</label>
+        <input type="text" id="palette" placeholder="Ex: preto e branco com detalhes em vermelho">
+      </div>
+
+      <div class="field">
+        <label class="title">06 · Seções desejadas</label>
+        <div class="chip-group" id="sectionChips">
+          <div class="chip">Hero</div>
+          <div class="chip">Sobre</div>
+          <div class="chip">Serviços</div>
+          <div class="chip">Portfólio/Galeria</div>
+          <div class="chip">Depoimentos</div>
+          <div class="chip">Preços</div>
+          <div class="chip">FAQ</div>
+          <div class="chip">Contato</div>
+          <div class="chip">Blog</div>
+          <div class="chip">Newsletter</div>
+          <div class="chip">Footer</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="title">07 · Funcionalidades</label>
+        <div class="chip-group" id="featureChips">
+          <div class="chip teal">Formulário de contato</div>
+          <div class="chip teal">Botão WhatsApp</div>
+          <div class="chip teal">Carrinho de compras</div>
+          <div class="chip teal">Área de login</div>
+          <div class="chip teal">Animações on-scroll</div>
+          <div class="chip teal">Dark mode toggle</div>
+          <div class="chip teal">Multilíngue (PT/EN)</div>
+          <div class="chip teal">Mapa de localização</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="title">08 · Stack técnica</label>
+        <select id="stack">
+          <option>HTML, CSS e JavaScript puro (vanilla)</option>
+          <option>React</option>
+          <option>Next.js</option>
+          <option>React + Tailwind CSS</option>
+          <option>Vanilla JS + Tailwind CSS</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="title">09 · Público-alvo</label>
+        <input type="text" id="audience" placeholder="Ex: jovens adultos 20-35 anos, classe B/C, região de Goiânia">
+      </div>
+
+      <div class="field">
+        <label class="title">10 · Tom da copy (textos do site)</label>
+        <select id="tone">
+          <option>Profissional e direto</option>
+          <option>Descontraído e próximo</option>
+          <option>Sofisticado/premium</option>
+          <option>Técnico/especialista</option>
+          <option>Divertido/jovem</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="title">11 · Referências / inspirações (opcional)</label>
+        <textarea id="refs" placeholder="Ex: gosto do visual limpo tipo Apple, ou sites de barbearias americanas..."></textarea>
+      </div>
+
+      <div class="field">
+        <label class="title">12 · Observações extras (opcional)</label>
+        <textarea id="notes" placeholder="Qualquer restrição, prazo, integração específica etc."></textarea>
+      </div>
+
+    </div>
+
+    <!-- TERMINAL OUTPUT -->
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="term-dots"><span></span><span></span><span></span></div>
+        <div class="term-title">prompt-preview.txt</div>
+        <div class="term-actions">
+          <button class="btn" id="downloadBtn">baixar .txt</button>
+          <button class="btn primary" id="copyBtn">copiar prompt</button>
+        </div>
+      </div>
+      <div class="term-body" id="output">gerando prompt<span class="cursor"></span></div>
+    </div>
+  </div>
+
+  <footer>montado localmente no seu navegador · nenhum dado sai daqui</footer>
+</div>
+
+<div class="copied-msg" id="copiedMsg">✓ prompt copiado pra área de transferência</div>
+<script src="prompt.js"></script>
+</body>
+</html>
